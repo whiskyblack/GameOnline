@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sky.blue.gameonline.MainActivity">
+
+    <sky.blue.gameonline.ui.GameView
+        android:id="@+id/gameView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:weightSum="10"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_weight="3.5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <sky.blue.gameonline.ui.ButtonControll
+                    android:id="@+id/btnUp"
+                    android:background="@drawable/hold_on_bg"
+                    android:layout_weight="1"
+                    android:src="@drawable/up"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <sky.blue.gameonline.ui.ButtonControll
+                    android:id="@+id/btnLeft"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/hold_on_bg"
+                    android:src="@drawable/left" />
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <sky.blue.gameonline.ui.ButtonControll
+                    android:id="@+id/btnRight"
+                    android:background="@drawable/hold_on_bg"
+                    android:layout_weight="1"
+                    android:src="@drawable/right"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="3"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <sky.blue.gameonline.ui.ButtonControll
+                    android:id="@+id/btnDown"
+                    android:background="@drawable/hold_on_bg"
+                    android:layout_weight="1"
+                    android:src="@drawable/down"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="bottom"
+            android:layout_margin="10dp"
+            android:layout_weight="6.5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessParent">
+
+                <sky.blue.gameonline.ui.ChatView
+                    android:id="@+id/chatView"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="34dp" />
+
+                <ImageView
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/buttonChat"
+                    android:padding="5dp"
+                    android:src="@drawable/mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    tools:ignore="ContentDescription" />
+
+                <EditText
+                    android:visibility="gone"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="#ffffff"
+                    android:maxLines="1"
+                    android:id="@+id/txtMessage"
+                    android:padding="5dp"
+                    android:background="@null"
+                    android:textCursorDrawable="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/buttonChat"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/buttonChat"
+                    android:inputType="text" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
