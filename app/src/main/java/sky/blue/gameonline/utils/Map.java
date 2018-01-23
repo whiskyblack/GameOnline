@@ -104,10 +104,23 @@ public class Map {
                     listener.onDrawWarning(context.getResources().getString(R.string.thongbao1), X, Y);
                 } else if (X==39 && Y==44){
                     listener.onDrawWarning(context.getResources().getString(R.string.thongbao2), X, Y);
+                } else if (X==7 && Y==20){
+                    listener.onDrawWarning(context.getResources().getString(R.string.thongbao5), X, Y);
+                }
+            } else if (tilesId==28){
+                if (X==26 && Y==43){
+                    listener.onDrawWarning(context.getResources().getString(R.string.thongbao4), X, Y);
+                    return false;
+                } else if (X==5 && Y==43){
+                    listener.onDrawWarning(context.getResources().getString(R.string.thongbao3), X, Y);
+                    return false;
                 }
             } else if (tilesId==31){
                 if (X==40 && Y==44){
-                    listener.onDrawWarning(context.getResources().getString(R.string.thongbao1), X, Y);
+                    listener.onDrawWarning("Vào map 1", X, Y);
+                    return true;
+                } else if (X==5 && Y==44){
+                    listener.onDrawWarning("Vào map 2", X, Y);
                     return true;
                 }
             } else if (tilesId==35 || tilesId==36 || tilesId==37){

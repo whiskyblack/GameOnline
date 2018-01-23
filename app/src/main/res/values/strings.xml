@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">GameOnline</string>
-    <string name="thongbao1">RỪNG MÊ HOẶC@Nếu không cẩn thận@sẽ không toàn mạng@trở về!</string>
+    <string name="thongbao1">RỪNG MÊ HOẶC@Khu rừng rất nhiều@sói dữ, hãy thận@trọng vì chúng di@chuyển rất nhanh!</string>
     <string name="thongbao2">ĐẢO CHẾT@Vùng đất của@quỷ dữ!</string>
+    <string name="thongbao3">ĐẢO DỪA@Nơi có những@xác chết và@các bộ xương@biết di chuyển!</string>
+    <string name="thongbao4">RỪNG HƯỚNG DƯƠNG@Hoa mặt trời@rực rỡ bị cai@trị bởi người rắn!</string>
+    <string name="thongbao5">Vườn Hướng Dương</string>
 </resources>

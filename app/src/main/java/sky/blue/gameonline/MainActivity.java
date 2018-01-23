@@ -1,6 +1,8 @@
 package sky.blue.gameonline;
 
+import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,11 +15,16 @@ import android.widget.ImageView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import sky.blue.gameonline.listener.SocketListener;
 import sky.blue.gameonline.model.Database;
 import sky.blue.gameonline.ui.ButtonControll;
@@ -36,17 +43,37 @@ public class MainActivity extends AppCompatActivity implements SocketListener{
     ImageView buttonChat;
     boolean createMonsters =false, createPlayers=false, chat=false;
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Database.openDatabase(this, "UserAccount");
-        Database.setId(8);
-        Database.setName("????");
+        Database.setId(10);
+        Database.setName("Admin");
         onView();
         onEvent();
         socketConnect();
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                OkHttpClient client=new OkHttpClient();
+                FormBody body=new FormBody.Builder().add("name", "Admin").add("pass", "trungvo").build();
+                Request request=new Request.Builder()
+                        .url("http://ch3cooh.pe.hu/game-account/controlls/login.php")
+                        .post(body)
+                        .build();
+                try {
+                    Response response=client.newCall(request).execute();
+                    Log.i("DATARETURN", response.body().string());
+                } catch (IOException e) {
+                    Log.i("DATARETURN", e.toString());
+                }
+                return null;
+            }
+        }.execute();
     }
 
     private void socketEmit() {
@@ -180,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements SocketListener{
     private void socketConnect() {
         try {
             socket= IO.socket("http://192.168.43.218:1234");
+//            socket= IO.socket("http://192.168.90.2:1234");
             socket.connect();
             socketOn();
             socketEmit();

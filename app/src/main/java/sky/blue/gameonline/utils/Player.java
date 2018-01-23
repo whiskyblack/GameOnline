@@ -25,12 +25,12 @@ import static sky.blue.gameonline.utils.Map.tilesSize;
  */
 
 public class Player implements PlayerListener {
-    public static int[] playerPoint = {4, 5};
+    public static int[] playerPoint = {25, 43};
     private Bitmap player;
     private int size = 0, translateX = 0, translateY = 0, playerWidth = 0, playerHeight = 0,
             speed=4, currentFrame = 0, frame = 0, warningTime=250, chatTime = 250, maxW=0;
     static int x = 0, y = 0;
-    public static int playerId=3;
+    public static int playerId=9;
     public static boolean running = false;
     private boolean showWarning =false, chat = false;
     private Paint bgPaint, textPaint, paintName;
@@ -175,23 +175,42 @@ public class Player implements PlayerListener {
         if (frame==4)
             frame=0;
 
+        if(!chat) {
+            Rect rectName=new Rect();
+            paintName.getTextBounds(name, 0, name.length(), rectName);
+            canvas.drawText(name, x+tilesSize/2 - rectName.width() / 2,
+                    y - rectName.height()+5, paintName);
+        }
+
         if (showWarning){
             warningTime--;
-            int j=0;
+            int j=0, textHeight=0;
             canvas.drawRoundRect(warningRectF, 5, 5, bgPaint);
 
             for (String line:warning.split("@")){
                 textPaint.getTextBounds(line, 0, line.length(), warningRect);
                 if (maxW<warningRect.width()/2) {
                     maxW=warningRect.width() / 2;
-                    warningRectF.left = warningPoint[0] * tilesSize - maxW-10;
-                    warningRectF.right=warningPoint[0] * tilesSize + maxW+10;
+                    warningRectF.left = warningPoint[0] * tilesSize - maxW+tilesSize/2-20;
+                    warningRectF.right=warningPoint[0] * tilesSize + maxW+tilesSize/2+20;
                 }
-                warningRectF.top=warningPoint[1] * tilesSize-warningRect.height()-10;
-                warningRectF.bottom=warningPoint[1] * tilesSize+j*(warningRect.height()+5)+10;
-                canvas.drawText(line, warningPoint[0]*tilesSize-warningRect.width()/2,
-                        warningPoint[1]*tilesSize+j*(warningRect.height()+5), textPaint);
+
+                if (j == 0) {
+                    textHeight=warningRect.height()+10;
+                    warningRectF.top = warningPoint[1]*tilesSize - warning.split("@").length * textHeight+tilesSize/2+5;
+                    warningRectF.bottom = warningPoint[1]*tilesSize +20+tilesSize/2;
+//                    height = warningRectF.top - warningRectF.bottom;
+//                    warningRectF.top = warningRectF.top + height + 10-tilesSize/3;
+//                    warningRectF.bottom = warningPoint[1]*tilesSize - warningRect.height()+10-tilesSize/3;
+                    canvas.drawRoundRect(warningRectF, 5, 5, bgPaint);
+                }
+
+//                canvas.drawText(line, warningPoint[0]*tilesSize-warningRect.width()/2,
+//                        warningPoint[1]*tilesSize+j*(warningRect.height()+5), textPaint);
                 j++;
+
+                canvas.drawText(line, warningRectF.left + messageRect.width() / 2+20,
+                        warningRectF.top + j * textHeight, textPaint);
             }
 
             if (warningTime==0){
@@ -239,14 +258,9 @@ public class Player implements PlayerListener {
                 maxW = 0;
                 chat = false;
             }
-        } else {
-            Rect rectName=new Rect();
-            paintName.getTextBounds(name, 0, name.length(), rectName);
-            canvas.drawText(name, x+tilesSize/2 - rectName.width() / 2,
-                    y - rectName.height()+5, paintName);
         }
 
-//        Log.i("PlayerPoint", "PlayerPoint: "+playerPoint[0]+" - "+playerPoint[1]);
+        Log.i("PlayerPoint", "PlayerPoint: "+playerPoint[0]+" - "+playerPoint[1]);
     }
 
     public PlayerListener getListener(){
